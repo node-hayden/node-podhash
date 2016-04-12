@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Repo列表</title>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+</head>
+<body>
+<h1>Repo列表</h1>
+<%
+    list.forEach(function(item){
+        var path = item.id < 1 ? "/repo/add" : ("/repo/detail?repo_name="+item.repo_name);
+
+  %>
+<p><a href="<%= path%>"><%=item.repo_name%></a></p>
+<% }); %>
+</body>
+</html>

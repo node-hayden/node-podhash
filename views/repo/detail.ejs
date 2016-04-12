@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%=title%></title>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+</head>
+<body>
+<h1><%=title%></h1>
+<%
+    if(list.length){
+        list.forEach(function(item){
+%>
+<p><a href="/repo/mversion?repo_name=<%= repo_name%>&module_name=<%=item.module_name%>"><%=item.module_name%></a></p>
+<% });}else{ %>
+<p>没有数据</p>
+<%}%>
+</body>
+</html>

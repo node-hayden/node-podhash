@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%=title%></title>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+</head>
+<body>
+<h1><%=title%></h1>
+<%
+if(list.length){
+list.forEach(function(item){
+    var dp = item.depends.replace(/#@#/g," ");
+%>
+<h2><%=item.version%></h2>
+<p><%=dp%></p>
+<% });}else{ %>
+<p>没有数据</p>
+<%}%>
+</body>
+</html>

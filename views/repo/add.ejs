@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>添加Repo</title>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <script src="/javascripts/jquery-2.2.3.min.js"></script>
+</head>
+<body>
+<h1>添加Repo</h1>
+<form method="post" action="/add">
+    Repo名称（选填）:&nbsp;<input id="repo_name" name="repo_name" type="text"></input></br></br>
+    Repo地址（必填）:&nbsp;<input id="repo_source" name="repo_source" type="text"></input></br></br>
+    <input id="submit_btn" name="submit_btn" type="button" onclick="onSubmit()" value="提交"></input>
+</form>
+</body>
+</html>
+<script language="JavaScript">
+    function onSubmit(){
+        var inputName = $("#repo_name").val();
+        var inputSource = $("#repo_source").val();
+        if(inputSource == null){
+            alert("Repo地址不能为空!");
+            return;
+        }
+        var reg = /\s+/g;
+        inputSource = inputSource.replace(reg, "");
+        reg = /^http:\/\/\S+\.git$|^https:\/\/\S+\.git$|^\S+@\S+\.git$|^ssh:\/\/\S+\.git$/
+        if(!reg.test(inputSource)){
+            alert("请输入有效的Repo地址!");
+            return;
+        }
+
+        $.ajax({
+            type:"POST",
+            url:"/repo/add",
+            data:{repo_name:inputName, repo_source:inputSource},
+            datatype: "json",
+            beforeSend:function(){
+                $("#submit_btn").attr("disabled", true);
+            },
+            success:function(data){
+                if(data && data.eno == 0){
+                    alert("添加成功!");
+                    location.href = "/repo";
+                }else{
+                    if(data && data.msg){
+                        alert(data.msg);
+                    }else{
+                        alert("出错啦!");
+                    }
+                    $("#submit_btn").attr("disabled", false);
+                }
+            },
+            error: function(){
+                alert("出错啦!");
+                $("#submit_btn").attr("disabled", false);
+            }
+        });
+    }
+</script>

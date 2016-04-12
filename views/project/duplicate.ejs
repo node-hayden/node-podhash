@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>重名文件分析</title>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <script src="/javascripts/jquery-2.2.3.min.js"></script>
+</head>
+<body>
+<h1>重名文件分析</h1>
+<form method="post" action="/project/duplicate">
+    分析的模块（必填）:&nbsp;<input id="root" name="root" type="text"></input></br></br>
+    文件扩展名（选填）:&nbsp;<input id="ext" name="ext" type="text"></input>&nbsp;&nbsp;<label color="red">
+        需要查询的文件扩展名,多个扩展名用英文逗号分隔,如m,h,cpp,不填写则查询全部
+    </label></br></br>
+    <input id="submit_btn" name="submit_btn" type="submit" value="分析"></input>
+</form>
+</body>
+</html>
